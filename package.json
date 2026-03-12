@@ -1,0 +1,53 @@
+{
+  "name": "majik-cjson",
+  "type": "module",
+  "description": "Lightweight gzip-compressed JSON container with magic-byte framing. Compress, export, and restore typed JSON payloads as Blob, ArrayBuffer, or base64 — built for Cloudflare Workers and browser environments.",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "author": "Zelijah",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Majikah/majik-cjson.git"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/jedlsf"
+  },
+  "keywords": [
+    "json",
+    "compression",
+    "gzip",
+    "fflate",
+    "compressed-json",
+    "json-compression",
+    "blob",
+    "arraybuffer",
+    "base64",
+    "cloudflare-workers",
+    "browser",
+    "typescript",
+    "esm",
+    "serialization",
+    "binary",
+    "majikah"
+  ],
+  "homepage": "https://github.com/Majikah/majik-cjson#readme",
+  "bugs": {
+    "url": "https://github.com/Majikah/majik-cjson/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2"
+  },
+  "devDependencies": {}
+}
