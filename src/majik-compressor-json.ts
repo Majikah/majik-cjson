@@ -129,13 +129,21 @@ export class MajikCompressedJSON<T = Record<string, unknown>> {
    */
   readonly #compressed: Uint8Array;
 
+  readonly #compressionRatio: number;
+
   // -------------------------------------------------------------------------
   // Constructor (private — use create() or fromMJKCJSON())
   // -------------------------------------------------------------------------
 
-  private constructor(payload: T, compressed: Uint8Array) {
+  private constructor(
+    payload: T,
+    compressed: Uint8Array,
+    originalByteLength: number,
+  ) {
     this.#payload = payload;
     this.#compressed = compressed;
+    this.#compressionRatio =
+      originalByteLength === 0 ? 1 : compressed.byteLength / originalByteLength;
   }
 
   // -------------------------------------------------------------------------
@@ -185,7 +193,7 @@ export class MajikCompressedJSON<T = Record<string, unknown>> {
     // 4. Frame with magic header
     const framed = frame(gzipped);
 
-    return new MajikCompressedJSON<T>(parsed, framed);
+    return new MajikCompressedJSON<T>(parsed, framed, raw.byteLength);
   }
 
   // -------------------------------------------------------------------------
@@ -240,7 +248,7 @@ export class MajikCompressedJSON<T = Record<string, unknown>> {
       );
     }
 
-    return new MajikCompressedJSON<T>(payload, framed);
+    return new MajikCompressedJSON<T>(payload, framed, raw.byteLength);
   }
 
   // -------------------------------------------------------------------------
@@ -350,11 +358,7 @@ export class MajikCompressedJSON<T = Record<string, unknown>> {
    * Lower is better. e.g. 0.08 means 92% size reduction.
    */
   get compressionRatio(): number {
-    const originalSize = new TextEncoder().encode(
-      JSON.stringify(this.#payload),
-    ).byteLength;
-    if (originalSize === 0) return 1;
-    return this.#compressed.byteLength / originalSize;
+    return this.#compressionRatio;
   }
 
   /** True if the compressed payload is empty (defensive guard). */
