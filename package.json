@@ -1,8 +1,8 @@
 {
-  "name": "majik-cjson",
+  "name": "@majikah/majik-cjson",
   "type": "module",
   "description": "Lightweight gzip-compressed JSON container with magic-byte framing. Compress, export, and restore typed JSON payloads as Blob, ArrayBuffer, or base64 — built for Cloudflare Workers and browser environments.",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "license": "Apache-2.0",
   "author": "Zelijah",
   "main": "./dist/index.js",
